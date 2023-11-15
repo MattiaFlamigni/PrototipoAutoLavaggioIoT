@@ -1,11 +1,11 @@
 #ifndef __SONAR__
 #define __SONAR__
 
-#include "Proximity.h"
+#include "ProximitySensor.h"
 
 #define NO_OBJ_DETECTED -1
 
-class Sonar: public Proximity {
+class Sonar: public ProximitySensor {
 
 public:  
   Sonar(int echoPin, int trigPin, long maxTime);
