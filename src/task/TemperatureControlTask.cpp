@@ -5,6 +5,8 @@
 #include "config.h"
 
 
+#define DEBUG 1 // 0 - disable, 1 - enable
+
 
 TemperatureControlTask::TemperatureControlTask(){
     this->tempSensor = new TempSensorLM35(TMP_SENSOR_PIN);
@@ -14,20 +16,28 @@ TemperatureControlTask::TemperatureControlTask(){
 
 void TemperatureControlTask::tick(){
     float currentTemp = tempSensor->getTemperature();
-    Serial.println(currentTemp); 
+    if(DEBUG){
+        Serial.println(currentTemp); 
+    }
     
     switch (state)
     {
     case NORMAL:
-        Serial.println("NORMAL");
+        if(DEBUG){
+            Serial.println("NORMAL");
+        }
         if(currentTemp>0){
             setState(PRE_ALARM);
         }
         break;
     case PRE_ALARM:
-        Serial.println("PRE_ALARM");
+        if(DEBUG){
+            Serial.println("PRE_ALARM");
+        }
         for(int i=0; i<10; i++){
-            Serial.println("attesa");
+            if(DEBUG){
+                Serial.println("attesa");
+            }
             delay(100);
         }
         if(currentTemp>0){
@@ -40,7 +50,9 @@ void TemperatureControlTask::tick(){
         break;
 
     case ALARM:
-        Serial.println("ALARM");
+        if(DEBUG){
+            Serial.println("ALARM");
+        }
         if(button->isPressed()){
             setState(NORMAL);
         }
