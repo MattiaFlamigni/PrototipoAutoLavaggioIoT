@@ -15,7 +15,7 @@ private:
     enum {NORMAL, PRE_ALARM, ALARM} state;
     void setState(int state);
     TempSensorLM35* tempSensor;
-    ButtonImpl* button ;
+    Button* button ;
 };
 
 #endif

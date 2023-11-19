@@ -2,17 +2,19 @@
 #include "components/TempSensorLM35.h"
 #include <Arduino.h>
 #include "components/ButtonImpl.h"
+#include "config.h"
 
 
 
 TemperatureControlTask::TemperatureControlTask(){
     this->tempSensor = new TempSensorLM35(A0);
-    this->button = new ButtonImpl(7);
+    this->button = new ButtonImpl(BUTTON_PIN);
     setState(NORMAL);
 }
 
 void TemperatureControlTask::tick(){
     float currentTemp = tempSensor->getTemperature();
+    //bool isPressed = button->isPressed();  
     
     switch (state)
     {
@@ -30,19 +32,21 @@ void TemperatureControlTask::tick(){
         }
         if(currentTemp>0){
             setState(ALARM);
-            Serial.println("Alarm");
+            //Serial.println("Alarm");
 
         }else{
             setState(NORMAL);
         }
         break;
 
-        case ALARM:
-               //se premo pulsante ritorna a normal
-            if(button->isPressed()){
-                setState(NORMAL);
-            }
-            break;
+    case ALARM:
+        Serial.println("ALARM");
+        if(button->isPressed()){
+            setState(NORMAL);
+        }
+        
+        break;
+        
     }
 
 }
