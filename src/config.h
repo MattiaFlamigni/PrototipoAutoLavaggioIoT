@@ -1,7 +1,8 @@
 #ifndef __CONFIG__
 #define __CONFIG__
 
-#define BUTTON_PIN 7
+#define BUTTON_MAINTENACE_PIN 7
+
 
 
 
