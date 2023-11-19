@@ -7,14 +7,14 @@
 
 
 TemperatureControlTask::TemperatureControlTask(){
-    this->tempSensor = new TempSensorLM35(A0);
+    this->tempSensor = new TempSensorLM35(TMP_SENSOR_PIN);
     this->button = new ButtonImpl(BUTTON_MAINTENACE_PIN);
     setState(NORMAL);
 }
 
 void TemperatureControlTask::tick(){
     float currentTemp = tempSensor->getTemperature();
-    //bool isPressed = button->isPressed();  
+    Serial.println(currentTemp); 
     
     switch (state)
     {
