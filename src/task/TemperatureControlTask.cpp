@@ -10,7 +10,7 @@
 
 TemperatureControlTask::TemperatureControlTask(){
     this->tempSensor = new TempSensorLM35(TMP_SENSOR_PIN);
-    this->button = new ButtonImpl(BUTTON_MAINTENACE_PIN);
+    this->button = new ButtonImpl(100); //TODO
     setState(NORMAL);
 }
 
