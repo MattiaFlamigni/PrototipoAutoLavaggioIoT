@@ -4,12 +4,14 @@
 #include "components/Sonar.h"
 #include "components/Pir.h"
 #include "components/Servo.h"
+#include "components/Lcd.h"
 
 CarPresenceTask::CarPresenceTask() {
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
     this->servo = new Servo(SERVO_PIN);
     this->button = new ButtonImpl(START_BUTTON_PIN);
+    this->lcd = new Lcd();
     setState(SLEEP);
 }
 
@@ -26,7 +28,7 @@ void CarPresenceTask::tick() {
         case CHECKIN:
             servo->openGate();
             //l2 blink
-            //lcd display
+            lcd->display("Proceed to the washing area");
             if(sonar->getDistance() < MINDIST) {
                 setState(ENTERED);
             } 
@@ -35,7 +37,7 @@ void CarPresenceTask::tick() {
         case ENTERED:
             servo->closeGate();
             //l2 on
-            //lcd display
+            lcd->display("Ready to wash");
             if(button->isPressed()) {
                 setState(WASHING);
             }
@@ -49,7 +51,7 @@ void CarPresenceTask::tick() {
 
         case CHECKOUT:
             servo->openGate();
-            //lcd display checkout msg
+            lcd->display("Washing complete, you can leave the area");
             //l2 off and l3 on
             if(sonar->getDistance() > MAXDIST) {
                 setState(SLEEP);

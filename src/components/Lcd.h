@@ -4,7 +4,7 @@
 class Lcd {
     public:
         Lcd();
-        display(string msg);
+        void display(string msg);
 };
 
 #endif

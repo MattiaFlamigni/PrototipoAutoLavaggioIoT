@@ -6,6 +6,7 @@
 #include "components/Pir.h"
 #include "components/Servo.h"
 #include "components/ButtonImpl.h"
+#include "components/Lcd.h"
 
 class CarPresenceTask: public Task{
     public:
@@ -19,5 +20,7 @@ class CarPresenceTask: public Task{
         Pir* pir;
         Servo* servo;
         Button* button;
+        Lcd* lcd;
+
 };
 #endif 
