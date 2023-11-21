@@ -11,7 +11,7 @@ CarPresenceTask::CarPresenceTask() {
     this->pir = new Pir(PIR_PIN);
     this->servo = new Servo(SERVO_PIN);
     this->button = new ButtonImpl(START_BUTTON_PIN);
-    this->lcd = new Lcd();
+    this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     setState(SLEEP);
 }
 

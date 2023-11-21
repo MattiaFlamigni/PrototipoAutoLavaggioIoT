@@ -3,8 +3,12 @@
 
 class Lcd {
     public:
-        Lcd();
-        void display(string msg);
+        Lcd(int sda, int scl);
+        void display(char * msg);
+
+    private:
+        int sda;
+        int scl;
 };
 
 #endif

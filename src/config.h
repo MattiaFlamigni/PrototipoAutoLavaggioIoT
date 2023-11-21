@@ -12,6 +12,8 @@
 #define SONAR_TIME 400 //TODO
 #define PIR_PIN 100 //TODO
 #define SERVO_PIN 100 //TODO
+#define SDA_PIN A4
+#define SCL_PIN A5
 
 //Constants
 #define MINDIST 100 //TODO

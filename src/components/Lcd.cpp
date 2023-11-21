@@ -1,9 +1,11 @@
 #include "Lcd.h"
 #include "Arduino.h"
-Lcd::Lcd(/*TODO*/) {
-    //TODO
+
+Lcd::Lcd(int sda, int scl) {
+    this->sda = sda;
+    this->scl = scl;
 }
 
-void Lcd::display(string msg) {
+void Lcd::display(char * msg) {
     //TODO
 }
