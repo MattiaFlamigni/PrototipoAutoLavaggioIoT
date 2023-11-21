@@ -1,14 +1,15 @@
 #include "Arduino.h"
 #include "Servo.h"
 
-Servo::Servo(/*TODO*/) {
+Servo::Servo(int pin) {
+    this->pin = pin;
+    this->closeGate();
+}
+
+void Servo::closeGate() {
     //TODO
 }
 
-Servo::closeGate() {
-    //TODO
-}
-
-Servo::openGate() {
+void Servo::openGate() {
     //TODO
 }
