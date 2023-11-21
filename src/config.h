@@ -7,11 +7,11 @@
 #define GREEN_LED_1 3
 #define GREEN_LED_2 5
 #define RED_LED 4
-#define ECHO_PIN 100 //TODO
-#define TRIG_PIN 100 //TODO
+#define ECHO_PIN 13 
+#define TRIG_PIN 12 
 #define SONAR_TIME 400 //TODO
-#define PIR_PIN 100 //TODO
-#define SERVO_PIN 100 //TODO
+#define PIR_PIN 11 
+#define SERVO_PIN 6
 #define SDA_PIN A4
 #define SCL_PIN A5
 
