@@ -36,6 +36,7 @@ void CarPresenceTask::tick() {
             Serial.println(sonar->getDistance());
             servo->setPosition(90);
             //l2 blink
+            lcd->clear();
             lcd->display("Proceed to the washing area");
             if(sonar->getDistance()>0 && sonar->getDistance() < MINDIST) {
                 setState(ENTERED);
@@ -46,6 +47,7 @@ void CarPresenceTask::tick() {
             Serial.println("entered");
             servo->setPosition(0);
             //l2 on
+            lcd->clear();
             lcd->display("Ready to wash");
             if(button->isPressed()) {
                 setState(WASHING);
