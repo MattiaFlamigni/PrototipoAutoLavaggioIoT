@@ -21,16 +21,18 @@ void CarPresenceTask::tick() {
         case SLEEP:
             Serial.println("sleep");
             //deep sleep method
-            if(pir->isDetected()) {
+            if(pir->isDetected() {
                 setState(CHECKIN);
             }
         break;
 
         case CHECKIN:
             Serial.println("checkin");
+            Serial.println(sonar->getDistance());
             servo->openGate();
             //l2 blink
             lcd->display("Proceed to the washing area");
+            delay(100); //TODO
             if(sonar->getDistance() < MINDIST) {
                 setState(ENTERED);
             } 
