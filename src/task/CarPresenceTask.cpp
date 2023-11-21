@@ -19,6 +19,7 @@ void CarPresenceTask::tick() {
 
     switch(state) {
         case SLEEP:
+            Serial.println("sleep");
             //deep sleep method
             if(pir->isDetected()) {
                 setState(CHECKIN);
@@ -26,6 +27,7 @@ void CarPresenceTask::tick() {
         break;
 
         case CHECKIN:
+            Serial.println("checkin");
             servo->openGate();
             //l2 blink
             lcd->display("Proceed to the washing area");
@@ -35,6 +37,7 @@ void CarPresenceTask::tick() {
         break;
 
         case ENTERED:
+            Serial.println("entered");
             servo->closeGate();
             //l2 on
             lcd->display("Ready to wash");
@@ -44,12 +47,14 @@ void CarPresenceTask::tick() {
         break;
 
         case WASHING:
+            Serial.println("Washing");
             //l2 blink
             //display countdown
             //if(countdown = 0) {setState = CHECKOUT}
         break;
 
         case CHECKOUT:
+            Serial.println("Checkout");
             servo->openGate();
             lcd->display("Washing complete, you can leave the area");
             //l2 off and l3 on
