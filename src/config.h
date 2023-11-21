@@ -9,14 +9,14 @@
 #define RED_LED 4
 #define ECHO_PIN 13 
 #define TRIG_PIN 12 
-#define SONAR_TIME 400 //TODO
+#define SONAR_TIME 5000 //TODO
 #define PIR_PIN 11 
 #define SERVO_PIN 6
 #define SDA_PIN A4
 #define SCL_PIN A5
 
 //Constants
-#define MINDIST 100 //TODO
+#define MINDIST 0.04 //TODO
 #define MAXDIST 600 //TODO
 
 
