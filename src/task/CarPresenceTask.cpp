@@ -13,6 +13,7 @@ CarPresenceTask::CarPresenceTask() {
     this->pir = new Pir(PIR_PIN);
     this->servo = new ServoMotorImpl(SERVO_PIN);
     servo->on();
+    servo->setPosition(0);
     this->button = new ButtonImpl(START_BUTTON_PIN);
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     setState(SLEEP);
@@ -36,7 +37,7 @@ void CarPresenceTask::tick() {
             servo->setPosition(90);
             //l2 blink
             lcd->display("Proceed to the washing area");
-            if(sonar->getDistance() < MINDIST && sonar->getDistance()>0) {
+            if(sonar->getDistance()>0 && sonar->getDistance() < MINDIST) {
                 setState(ENTERED);
             } 
         break;
