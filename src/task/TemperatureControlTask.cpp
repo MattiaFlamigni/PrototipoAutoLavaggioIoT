@@ -5,7 +5,7 @@
 #include "config.h"
 
 
-#define DEBUG 1 // 0 - disable, 1 - enable
+#define DEBUG 0 // 0 - disable, 1 - enable
 
 
 TemperatureControlTask::TemperatureControlTask(){
