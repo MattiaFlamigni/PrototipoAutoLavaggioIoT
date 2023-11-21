@@ -4,9 +4,10 @@
 #include "Task.h"
 #include "components/Sonar.h"
 #include "components/Pir.h"
-#include "components/Servo.h"
+//#include "components/Servo.h"
 #include "components/ButtonImpl.h"
 #include "components/Lcd.h"
+#include "components/servo_motor.h"
 
 class CarPresenceTask: public Task{
     public:
@@ -18,7 +19,7 @@ class CarPresenceTask: public Task{
         void setState(int state);
         Sonar* sonar;
         Pir* pir;
-        Servo* servo;
+        ServoMotor* servo;
         Button* button;
         Lcd* lcd;
 

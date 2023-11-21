@@ -3,13 +3,16 @@
 #include "config.h"
 #include "components/Sonar.h"
 #include "components/Pir.h"
-#include "components/Servo.h"
+
 #include "components/Lcd.h"
+#include "components/servo_motor_impl.h"
+
 
 CarPresenceTask::CarPresenceTask() {
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
-    this->servo = new Servo(SERVO_PIN);
+    this->servo = new ServoMotorImpl(SERVO_PIN);
+    servo->on();
     this->button = new ButtonImpl(START_BUTTON_PIN);
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     setState(SLEEP);
@@ -19,9 +22,10 @@ void CarPresenceTask::tick() {
 
     switch(state) {
         case SLEEP:
+            lcd->display("Sleep");
             Serial.println("sleep");
             //deep sleep method
-            if(pir->isDetected() {
+            if(/*pir->isDetected()*/true) {
                 setState(CHECKIN);
             }
         break;
@@ -29,10 +33,9 @@ void CarPresenceTask::tick() {
         case CHECKIN:
             Serial.println("checkin");
             Serial.println(sonar->getDistance());
-            servo->openGate();
+            servo->setPosition(90);
             //l2 blink
             lcd->display("Proceed to the washing area");
-            delay(100); //TODO
             if(sonar->getDistance() < MINDIST) {
                 setState(ENTERED);
             } 
@@ -40,7 +43,7 @@ void CarPresenceTask::tick() {
 
         case ENTERED:
             Serial.println("entered");
-            servo->closeGate();
+            servo->setPosition(0);
             //l2 on
             lcd->display("Ready to wash");
             if(button->isPressed()) {
@@ -57,7 +60,7 @@ void CarPresenceTask::tick() {
 
         case CHECKOUT:
             Serial.println("Checkout");
-            servo->openGate();
+            servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
             //l2 off and l3 on
             if(sonar->getDistance() > MAXDIST) {
