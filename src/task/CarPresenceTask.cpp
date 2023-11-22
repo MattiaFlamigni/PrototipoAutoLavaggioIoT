@@ -7,6 +7,8 @@
 #include "components/Lcd.h"
 #include "components/servo_motor_impl.h"
 
+#define DEBUG 1 // 0 - disable, 1 - enable
+
 
 CarPresenceTask::CarPresenceTask() {
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
@@ -16,6 +18,7 @@ CarPresenceTask::CarPresenceTask() {
     servo->setPosition(0);
     this->button = new ButtonImpl(START_BUTTON_PIN);
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
+    lcd->clear();
     setState(SLEEP);
 }
 
@@ -23,17 +26,19 @@ void CarPresenceTask::tick() {
 
     switch(state) {
         case SLEEP:
-            lcd->display("Sleep");
-            Serial.println("sleep");
+            if(DEBUG){  
+                lcd->display("Sleep");    
+                Serial.println("sleep");
+            }
             //deep sleep method
+            delay(600); //TODO
             if(/*pir->isDetected()*/true) {
                 setState(CHECKIN);
             }
         break;
 
         case CHECKIN:
-            Serial.println("checkin");
-            Serial.println(sonar->getDistance());
+        
             servo->setPosition(90);
             //l2 blink
             lcd->clear();
@@ -44,7 +49,9 @@ void CarPresenceTask::tick() {
         break;
 
         case ENTERED:
-            Serial.println("entered");
+            if(DEBUG){
+                Serial.println("entered");
+            }
             servo->setPosition(0);
             //l2 on
             lcd->clear();
@@ -55,7 +62,9 @@ void CarPresenceTask::tick() {
         break;
 
         case WASHING:
-            Serial.println("Washing");
+            if(DEBUG){
+                Serial.println("Washing");
+            }
             //l2 blink
             //display countdown
             //if(countdown = 0) {setState = CHECKOUT}
