@@ -11,9 +11,9 @@ void setup() {
     Task* temperature = new TemperatureControlTask();
     Task* carControl = new CarPresenceTask();
     temperature->init(50);
-    carControl->init(20);
+    carControl->init(100);
 
-    sched.addTask(temperature);
+    //sched.addTask(temperature);
     sched.addTask(carControl);
 }
 
