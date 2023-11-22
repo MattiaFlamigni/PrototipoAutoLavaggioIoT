@@ -7,7 +7,7 @@
 #include "components/Lcd.h"
 #include "components/servo_motor_impl.h"
 
-#define DEBUG 1 // 0 - disable, 1 - enable
+#define DEBUG 0 // 0 - disable, 1 - enable
 
 unsigned long startTime;
 unsigned long countdownDuration = 5000;  //  (5 secondi)
@@ -38,7 +38,7 @@ void CarPresenceTask::tick() {
                 Serial.println("sleep");
             }
             //deep sleep method
-            delay(600); //TODO
+            delay(1000); //TODO
             if(/*pir->isDetected()*/true) {
                 setState(CHECKIN);
             }
@@ -100,16 +100,19 @@ void CarPresenceTask::tick() {
         break;
 
         case CHECKOUT:
+            countdownActive = true;
+            countdownActive = true;
             lcd->clear();
             Serial.println("Checkout");
             servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
             //l2 off and l3 on
-            Serial.println(sonar->getDistance());
+            //Serial.println(sonar->getDistance());
             if(sonar->getDistance() > MAXDIST && sonar->getDistance() > 0) {
                 servo->setPosition(0);
                 setState(SLEEP);
             }
+            
         break;
     }
 

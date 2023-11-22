@@ -12,6 +12,7 @@ TemperatureControlTask::TemperatureControlTask(){
     this->tempSensor = new TempSensorLM35(TMP_SENSOR_PIN);
     this->button = new ButtonImpl(100); //TODO
     setState(NORMAL);
+    
 }
 
 void TemperatureControlTask::tick(){
@@ -23,27 +24,33 @@ void TemperatureControlTask::tick(){
     switch (state)
     {
     case NORMAL:
+        
         if(DEBUG){
             Serial.println("NORMAL");
         }
         if(currentTemp>0){
+            
             setState(PRE_ALARM);
         }
         break;
     case PRE_ALARM:
+        
         if(DEBUG){
             Serial.println("PRE_ALARM");
         }
         //wait Nseconds //TODO
-        for(int i=0; i<10; i++){
+    
+        for(int i=0; i<2; i++){
             if(DEBUG){
                 Serial.println("attesa");
             }
-            delay(100);
+            delay(50); 
         }
+
+
         if(currentTemp>0){
             setState(ALARM);
-            //Serial.println("Alarm");
+            Serial.println("Alarm");
 
         }else{
             setState(NORMAL);
