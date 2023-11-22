@@ -37,8 +37,8 @@ void CarPresenceTask::tick() {
             servo->setPosition(90);
             //l2 blink
             lcd->clear();
-            lcd->display("Proceed to the washing area");
-            if(sonar->getDistance()>0 && sonar->getDistance() < MINDIST) {
+            lcd->twoLineText("Proceed to the washing area");
+            if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
                 setState(ENTERED);
             } 
         break;
