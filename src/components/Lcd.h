@@ -8,6 +8,7 @@ class Lcd {
         Lcd(int sda, int scl);
         void display(char* msg);
         void clear();
+        void twoLineText(char *msg);
         
         /*void scrollText(String text);*/
 
