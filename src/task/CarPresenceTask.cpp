@@ -9,6 +9,11 @@
 
 #define DEBUG 1 // 0 - disable, 1 - enable
 
+unsigned long startTime;
+unsigned long countdownDuration = 5000;  //  (5 secondi)
+bool countdownActive = true;
+bool updateTimer;
+
 
 CarPresenceTask::CarPresenceTask() {
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
@@ -20,6 +25,8 @@ CarPresenceTask::CarPresenceTask() {
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     lcd->clear();
     setState(SLEEP);
+    updateTimer = true;
+    
 }
 
 void CarPresenceTask::tick() {
@@ -38,7 +45,7 @@ void CarPresenceTask::tick() {
         break;
 
         case CHECKIN:
-        
+
             servo->setPosition(90);
             //l2 blink
             lcd->clear();
@@ -57,20 +64,45 @@ void CarPresenceTask::tick() {
             lcd->clear();
             lcd->display("Ready to wash");
             if(button->isPressed()) {
+                
                 setState(WASHING);
             }
         break;
 
         case WASHING:
+
+            if(updateTimer){
+                startTime = millis();
+                updateTimer = false;
+            }
+        
             if(DEBUG){
                 Serial.println("Washing");
             }
             //l2 blink
+
+
             //display countdown
+            if(countdownActive) {
+                unsigned long currentTime = millis();
+                unsigned long elapsedTime = currentTime - startTime;
+                unsigned long remainingTime = countdownDuration - elapsedTime;
+
+                if (remainingTime/1000 > 0) {
+                    lcd->clear();
+                    lcd->display(remainingTime / 1000);
+                } else {
+                    countdownActive = false;
+                    setState(CHECKOUT);
+
+                }
+            }
+
             //if(countdown = 0) {setState = CHECKOUT}
         break;
 
         case CHECKOUT:
+            lcd->clear();
             Serial.println("Checkout");
             servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
