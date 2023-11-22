@@ -82,7 +82,7 @@ void CarPresenceTask::tick() {
             //l2 blink
 
 
-            //display countdown
+            
             if(countdownActive) {
                 unsigned long currentTime = millis();
                 unsigned long elapsedTime = currentTime - startTime;
@@ -97,8 +97,6 @@ void CarPresenceTask::tick() {
 
                 }
             }
-
-            //if(countdown = 0) {setState = CHECKOUT}
         break;
 
         case CHECKOUT:
@@ -107,7 +105,9 @@ void CarPresenceTask::tick() {
             servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
             //l2 off and l3 on
-            if(sonar->getDistance() > MAXDIST) {
+            Serial.println(sonar->getDistance());
+            if(sonar->getDistance() > MAXDIST && sonar->getDistance() > 0) {
+                servo->setPosition(0);
                 setState(SLEEP);
             }
         break;
