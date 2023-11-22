@@ -21,6 +21,9 @@ Lcd::Lcd(int sda, int scl) {
 void Lcd::display(char *msg){
     lcd.print(msg);
 }
+void Lcd::display(int msg){
+    lcd.print(msg);
+}
 
 void Lcd::twoLineText(char *msg) {
     lcd.clear();

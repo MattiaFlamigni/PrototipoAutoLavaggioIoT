@@ -7,6 +7,7 @@ class Lcd {
     public:
         Lcd(int sda, int scl);
         void display(char* msg);
+        void display(int msg);
         void clear();
         void twoLineText(char *msg);
         
