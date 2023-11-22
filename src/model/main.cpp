@@ -7,13 +7,13 @@
 Scheduler sched;
 void setup() {
     Serial.begin(9600);
-    sched.init(300);
+    sched.init(100);
     Task* temperature = new TemperatureControlTask();
     Task* carControl = new CarPresenceTask();
-    temperature->init(100);
-    carControl->init(30);
+    //temperature->init(100);
+    carControl->init(100);
 
-    sched.addTask(temperature);
+    //sched.addTask(temperature);
     sched.addTask(carControl);
 }
 
