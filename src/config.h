@@ -16,8 +16,8 @@
 #define SCL_PIN A5
 
 //Constants
-#define MINDIST 0.04 //TODO
-#define MAXDIST 600 //TODO
+#define MINDIST 0.04 
+#define MAXDIST 0.1 //TODO
 
 
 
