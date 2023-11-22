@@ -34,6 +34,7 @@ void TemperatureControlTask::tick(){
         if(DEBUG){
             Serial.println("PRE_ALARM");
         }
+        //wait Nseconds //TODO
         for(int i=0; i<10; i++){
             if(DEBUG){
                 Serial.println("attesa");
