@@ -12,6 +12,7 @@ void Pir::sync(){
 }
 
 bool Pir::isDetected(){
+  detected = digitalRead(pin);
   return detected;
 }
 

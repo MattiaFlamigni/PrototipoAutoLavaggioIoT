@@ -39,7 +39,7 @@ void CarPresenceTask::tick() {
             }
             //deep sleep method
             delay(1000); //TODO
-            if(/*pir->isDetected()*/true) {
+            if(pir->isDetected()) {
                 setState(CHECKIN);
             }
         break;
