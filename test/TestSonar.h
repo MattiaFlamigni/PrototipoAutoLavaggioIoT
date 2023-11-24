@@ -9,7 +9,7 @@ class TestSonar {
         float testDistance();
 
     private:    
-        Sonar sonar;
-}
+        Sonar* sonar;
+};
 
 #endif

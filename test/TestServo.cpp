@@ -5,13 +5,13 @@
 
 TestServo::TestServo() {
     this->pin = SERVO_PIN;
-    this->servo = new ServoMotorImpl;
+    this->servo = new ServoMotorImpl(SERVO_PIN);
 }
 
-TestServo::testOpenGate() {
+void TestServo::testOpenGate() {
     servo->setPosition(0);
 }
 
-TestServo::testCloseGate() {
+void TestServo::testCloseGate() {
     servo->setPosition(90);
 }

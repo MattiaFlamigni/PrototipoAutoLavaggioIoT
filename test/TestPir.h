@@ -6,8 +6,8 @@
 class TestPir {
     public:
         TestPir();
-        testDetected();
+        void testDetected();
     private:
     Pir* pir;
-}
+};
 #endif

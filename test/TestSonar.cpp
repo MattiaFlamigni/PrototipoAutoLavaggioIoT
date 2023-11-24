@@ -4,10 +4,10 @@
 #include "config.h"
 
 TestSonar::TestSonar() {
-    this.sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME)
+    this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
 }
 
-TestSonar::testDistance() {
+float TestSonar::testDistance() {
     Serial.print("Current distance is: ");
-    Serial.println(sonar.getDistance());
+    Serial.println(sonar->getDistance());
 }

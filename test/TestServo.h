@@ -12,5 +12,5 @@ class TestServo {
         int pin;
         ServoMotorImpl* servo;
         
-}
+};
 #endif

@@ -7,14 +7,14 @@ TestLcd::TestLcd() {
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
 }
 
-TestLcd::testDisplay(char *msg) {
+void TestLcd::testDisplay(char* msg) {
     lcd->display(msg);
 }
 
-TestLcd::testClear() {
+void TestLcd::testClear() {
     lcd->clear();
 }
 
-TestLcd::testTwoLineText(char *msg) {
+void TestLcd::testTwoLineText(char* msg) {
     lcd->twoLineText(msg);
 }

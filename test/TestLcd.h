@@ -11,5 +11,5 @@ class TestLcd {
     
     private:
         Lcd* lcd;
-}
+};
 #endif

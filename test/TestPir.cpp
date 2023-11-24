@@ -6,9 +6,9 @@ TestPir::TestPir() {
     this->pir = new Pir(PIR_PIN);
 }
 
-TestPir::testDetected() {
+void TestPir::testDetected() {
     if(pir->isDetected()) {
-        Serial.println("Something detected")
+        Serial.println("Something detected");
     }
     else {
         Serial.println("Nothing detected");
