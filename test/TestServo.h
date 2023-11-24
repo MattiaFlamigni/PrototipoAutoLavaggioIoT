@@ -5,8 +5,8 @@
 class TestServo {
     public:
         TestServo();
-        testOpenGate();
-        testCloseGate();
+        void testOpenGate();
+        void testCloseGate();
     
     private:
         int pin;
