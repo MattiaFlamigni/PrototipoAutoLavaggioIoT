@@ -12,7 +12,7 @@ void setup() {
     sched.init(50);
     Task* temperature = new TemperatureControlTask();
     Task* blinkTask = new BlinkTask(RED_LED);
-    Task* carControl = new CarPresenceTask(blinkTask);
+    Task* carControl = new CarPresenceTask(blinkTask, temperature);
     
     temperature->init(50);
     carControl->init(100);

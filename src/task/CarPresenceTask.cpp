@@ -7,6 +7,7 @@
 #include "components/Lcd.h"
 #include "components/servo_motor_impl.h"
 #include "components/Led.h"
+#include "MyNonBlockingDelay.h"
 
 
 #define DEBUG 1 // 0 - disable, 1 - enable
@@ -15,10 +16,12 @@ unsigned long startTime;
 unsigned long countdownDuration = 5000;  //  (5 secondi)
 bool countdownActive = true;
 bool updateTimer;
+float distance=-1;
 
 
-CarPresenceTask::CarPresenceTask(Task* blink) {
+CarPresenceTask::CarPresenceTask(Task* blink, Task* temperature) {
     this->blink=blink;
+    this->temperature = temperature;
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
 
@@ -34,6 +37,8 @@ CarPresenceTask::CarPresenceTask(Task* blink) {
     this->G1 = new Led(GREEN_LED_1);
     this->G2 = new Led(GREEN_LED_2);
     this->R = new Led(RED_LED);
+
+    this->delay=new MyNonBlockingDelay();
 
 
 
@@ -52,7 +57,7 @@ void CarPresenceTask::tick() {
                 Serial.println("sleep");
             }
             //deep sleep method
-            delay(1000); //TODO
+            
             if(/*pir->isDetected()*/true) {
                 G1->switchOn();
                 lcd->display("Welcome"); 
@@ -70,11 +75,21 @@ void CarPresenceTask::tick() {
 
             lcd->clear();
             lcd->twoLineText("Proceed to the washing area");
-            Serial.println(sonar->getDistance());
-            if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
-                Serial.println(sonar->getDistance());
+            //Serial.println(sonar->getDistance());
+            delay->setDelay(2000); //set 2second waiting
+            while(!delay->isDelayComplete()){
+                /*if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
+                    Serial.println(sonar->getDistance());
+                    setState(ENTERED);
+                }*/
+
+                    distance=sonar->getDistance();
+                
+            }
+
+            if(distance>0 && distance<=MINDIST){
                 setState(ENTERED);
-            } 
+            }
         break;
 
         case ENTERED:

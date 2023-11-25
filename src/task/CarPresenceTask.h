@@ -9,10 +9,11 @@
 #include "components/Lcd.h"
 #include "components/servo_motor.h"
 #include "components/Led.h"
+#include "MyNonBlockingDelay.h"
 
 class CarPresenceTask: public Task{
     public:
-        CarPresenceTask(Task* blink);
+        CarPresenceTask(Task* blink, Task* temperature );
         void tick();
 
     private:
@@ -27,6 +28,11 @@ class CarPresenceTask: public Task{
         Led* G2;
         Led* R;
         Task* blink;
+        Task* temperature;
+
+        MyNonBlockingDelay* delay;
+
+
 
 };
 #endif 
