@@ -6,8 +6,9 @@
 
 #include "components/Lcd.h"
 #include "components/servo_motor_impl.h"
+#include "components/Led.h"
 
-#define DEBUG 0 // 0 - disable, 1 - enable
+#define DEBUG 1 // 0 - disable, 1 - enable
 
 unsigned long startTime;
 unsigned long countdownDuration = 5000;  //  (5 secondi)
@@ -18,12 +19,23 @@ bool updateTimer;
 CarPresenceTask::CarPresenceTask() {
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
+
     this->servo = new ServoMotorImpl(SERVO_PIN);
     servo->on();
     servo->setPosition(0);
+
     this->button = new ButtonImpl(START_BUTTON_PIN);
+
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     lcd->clear();
+
+    this->G1 = new Led(GREEN_LED_1);
+    this->G2 = new Led(GREEN_LED_2);
+    this->R = new Led(RED_LED);
+
+
+
+
     setState(SLEEP);
     updateTimer = true;
     
@@ -39,7 +51,10 @@ void CarPresenceTask::tick() {
             }
             //deep sleep method
             delay(1000); //TODO
-            if(pir->isDetected()) {
+            if(/*pir->isDetected()*/true) {
+                G1->switchOn();
+                lcd->display("Welcome"); 
+                //wait
                 setState(CHECKIN);
             }
         break;
@@ -47,7 +62,7 @@ void CarPresenceTask::tick() {
         case CHECKIN:
 
             servo->setPosition(90);
-            //l2 blink
+            //red blink
             lcd->clear();
             lcd->twoLineText("Proceed to the washing area");
             if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
@@ -60,7 +75,8 @@ void CarPresenceTask::tick() {
                 Serial.println("entered");
             }
             servo->setPosition(0);
-            //l2 on
+            //red on
+            R->switchOn();
             lcd->clear();
             lcd->display("Ready to wash");
             if(button->isPressed()) {
@@ -79,7 +95,7 @@ void CarPresenceTask::tick() {
             if(DEBUG){
                 Serial.println("Washing");
             }
-            //l2 blink
+            //red blink
 
 
             
@@ -106,7 +122,9 @@ void CarPresenceTask::tick() {
             Serial.println("Checkout");
             servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
-            //l2 off and l3 on
+            //red off and g2 on
+            R->switchOff();
+            G2->switchOn();
             //Serial.println(sonar->getDistance());
             if(sonar->getDistance() > MAXDIST && sonar->getDistance() > 0) {
                 servo->setPosition(0);

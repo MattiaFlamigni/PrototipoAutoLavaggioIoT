@@ -8,6 +8,7 @@
 #include "components/ButtonImpl.h"
 #include "components/Lcd.h"
 #include "components/servo_motor.h"
+#include "components/Led.h"
 
 class CarPresenceTask: public Task{
     public:
@@ -22,6 +23,9 @@ class CarPresenceTask: public Task{
         ServoMotor* servo;
         Button* button;
         Lcd* lcd;
+        Led* G1;
+        Led* G2;
+        Led* R;
 
 };
 #endif 
