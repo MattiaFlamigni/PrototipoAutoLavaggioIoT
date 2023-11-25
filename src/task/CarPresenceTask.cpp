@@ -147,7 +147,11 @@ void CarPresenceTask::tick() {
             R->switchOff();
             G2->switchOn();
             //Serial.println(sonar->getDistance());
-            if(sonar->getDistance() > MAXDIST && sonar->getDistance() > 0) {
+            delay->setDelay(2000);
+            while(!delay->isDelayComplete()){
+                distance=sonar->getDistance();
+            }
+            if(distance> MAXDIST && distance> 0) {
                 servo->setPosition(0);
                 setState(SLEEP);
             }
