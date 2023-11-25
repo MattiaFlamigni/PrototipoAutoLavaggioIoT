@@ -12,7 +12,7 @@
 
 class CarPresenceTask: public Task{
     public:
-        CarPresenceTask();
+        CarPresenceTask(Task* blink);
         void tick();
 
     private:
@@ -26,6 +26,7 @@ class CarPresenceTask: public Task{
         Led* G1;
         Led* G2;
         Led* R;
+        Task* blink;
 
 };
 #endif 

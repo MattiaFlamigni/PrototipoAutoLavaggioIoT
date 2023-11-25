@@ -8,6 +8,7 @@
 #include "components/servo_motor_impl.h"
 #include "components/Led.h"
 
+
 #define DEBUG 1 // 0 - disable, 1 - enable
 
 unsigned long startTime;
@@ -16,7 +17,8 @@ bool countdownActive = true;
 bool updateTimer;
 
 
-CarPresenceTask::CarPresenceTask() {
+CarPresenceTask::CarPresenceTask(Task* blink) {
+    this->blink=blink;
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
 
@@ -62,15 +64,21 @@ void CarPresenceTask::tick() {
         case CHECKIN:
 
             servo->setPosition(90);
-            //red blink
+            blink->setActive(true);
+            
+            
+
             lcd->clear();
             lcd->twoLineText("Proceed to the washing area");
+            Serial.println(sonar->getDistance());
             if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
+                Serial.println(sonar->getDistance());
                 setState(ENTERED);
             } 
         break;
 
         case ENTERED:
+            blink->setActive(false);
             if(DEBUG){
                 Serial.println("entered");
             }
@@ -96,6 +104,8 @@ void CarPresenceTask::tick() {
                 Serial.println("Washing");
             }
             //red blink
+            R->switchOff();
+            blink->setActive(true);
 
 
             
@@ -123,6 +133,7 @@ void CarPresenceTask::tick() {
             servo->setPosition(90);
             lcd->display("Washing complete, you can leave the area");
             //red off and g2 on
+            blink->setActive(false);
             R->switchOff();
             G2->switchOn();
             //Serial.println(sonar->getDistance());
