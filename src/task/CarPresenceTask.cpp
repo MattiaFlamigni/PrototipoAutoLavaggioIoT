@@ -75,15 +75,10 @@ void CarPresenceTask::tick() {
 
             lcd->clear();
             lcd->twoLineText("Proceed to the washing area");
-            //Serial.println(sonar->getDistance());
             delay->setDelay(2000); //set 2second waiting
             while(!delay->isDelayComplete()){
-                /*if(sonar->getDistance()>0 && sonar->getDistance() <= MINDIST) {
-                    Serial.println(sonar->getDistance());
-                    setState(ENTERED);
-                }*/
 
-                    distance=sonar->getDistance();
+                distance=sonar->getDistance();
                 
             }
 
