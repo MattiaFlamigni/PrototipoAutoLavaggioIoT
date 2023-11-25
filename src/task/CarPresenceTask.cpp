@@ -75,10 +75,11 @@ void CarPresenceTask::tick() {
 
             lcd->clear();
             lcd->twoLineText("Proceed to the washing area");
+            //Serial.println(sonar->getDistance());
             delay->setDelay(2000); //set 2second waiting
             while(!delay->isDelayComplete()){
 
-                distance=sonar->getDistance();
+                    distance=sonar->getDistance();
                 
             }
 
@@ -149,9 +150,11 @@ void CarPresenceTask::tick() {
             //Serial.println(sonar->getDistance());
             delay->setDelay(2000);
             while(!delay->isDelayComplete()){
-                distance=sonar->getDistance();
+                distance = sonar->getDistance();
             }
-            if(distance> MAXDIST && distance> 0) {
+
+
+            if(distance > MAXDIST && distance > 0) {
                 servo->setPosition(0);
                 setState(SLEEP);
             }
