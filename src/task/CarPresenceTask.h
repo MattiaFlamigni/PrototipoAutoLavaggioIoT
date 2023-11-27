@@ -10,6 +10,7 @@
 #include "components/servo_motor.h"
 #include "components/Led.h"
 #include "MyNonBlockingDelay.h"
+#include "PowerManager.h"
 
 class CarPresenceTask: public Task{
     public:
@@ -19,6 +20,7 @@ class CarPresenceTask: public Task{
     private:
         enum {SLEEP, CHECKIN, ENTERED, WASHING, CHECKOUT} state;
         void setState(int state);
+
         Sonar* sonar;
         Pir* pir;
         ServoMotor* servo;
@@ -30,6 +32,7 @@ class CarPresenceTask: public Task{
         Task* blink;
         Task* temperature;
 
+        PowerManager* power;
         MyNonBlockingDelay* delay;
 
 

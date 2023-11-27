@@ -8,6 +8,8 @@
 #include "components/servo_motor_impl.h"
 #include "components/Led.h"
 #include "MyNonBlockingDelay.h"
+#include <Time.h>
+#include <avr/sleep.h>
 
 
 #define DEBUG 1 // 0 - disable, 1 - enable
@@ -40,6 +42,13 @@ CarPresenceTask::CarPresenceTask(Task* blink, Task* temperature) {
 
     this->delay=new MyNonBlockingDelay();
 
+    this->power = new PowerManager();
+
+    power->enablePIRInterrupt();
+
+    
+
+
 
 
 
@@ -57,14 +66,20 @@ void CarPresenceTask::tick() {
                 Serial.println("sleep");
             }
             //deep sleep method
+            power->sleep();
+            G1->switchOn();
+            lcd->display("Welcome"); 
+            setState(CHECKIN);
             
-            if(/*pir->isDetected()*/true) {
-                G1->switchOn();
+            //if(/*pir->isDetected()*/true) {
+                /*G1->switchOn();
                 lcd->display("Welcome"); 
-                //wait
-                setState(CHECKIN);
-            }
-        break;
+                
+                setState(CHECKIN);*/
+
+                
+            //}
+            break;
 
         case CHECKIN:
 
@@ -167,3 +182,6 @@ void CarPresenceTask::tick() {
 void CarPresenceTask::setState(int s) {
     state = s;
 }
+
+
+
