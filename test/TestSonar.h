@@ -6,7 +6,7 @@
 class TestSonar {
     public:
         TestSonar();
-        float testDistance();
+        void testDistance();
 
     private:    
         Sonar* sonar;
