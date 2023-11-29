@@ -5,7 +5,7 @@
 #include "config.h"
 
 
-#define DEBUG 0 // 0 - disable, 1 - enable
+#define DEBUG 1 // 0 - disable, 1 - enable
 
 
 TemperatureControlTask::TemperatureControlTask(){
@@ -18,6 +18,7 @@ TemperatureControlTask::TemperatureControlTask(){
 void TemperatureControlTask::tick(){
     float currentTemp = tempSensor->getTemperature();
     if(DEBUG){
+        Serial.print("T: ");
         Serial.println(currentTemp); 
     }
     
@@ -48,9 +49,9 @@ void TemperatureControlTask::tick(){
         }
 
 
-        if(currentTemp>0){
+        if(currentTemp>30){
             setState(ALARM);
-            Serial.println("Alarm");
+            Serial.println("AT: Alarm");
 
         }else{
             setState(NORMAL);
@@ -59,7 +60,7 @@ void TemperatureControlTask::tick(){
 
     case ALARM:
         if(DEBUG){
-            Serial.println("ALARM");
+            Serial.println("AT: alarm");
         }
         if(button->isPressed()){
             setState(NORMAL);

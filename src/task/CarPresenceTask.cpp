@@ -59,17 +59,19 @@ void CarPresenceTask::tick()
             Serial.println("sleep");
         }
         // deep sleep method
-        power->sleep();
+        //power->sleep();
         setState(DETECTED);
         break;
 
     case DETECTED:
+            lcd->clear();
             lcd->display("Welcome");
             G1->switchOn();
             delay->setDelay(N1);
             while(!delay->isDelayComplete()) {
                 temperature->tick();
             }
+            setState(CHECKIN);
         break;
     case CHECKIN:
 

@@ -10,7 +10,6 @@ public class Monitoring extends Thread  {
         this.channel = channel;
         this.view = view;
         
-        
     }
 
 
@@ -26,6 +25,10 @@ public class Monitoring extends Thread  {
                     if (tokens[0].equals("T:")){
                         view.setTemperature(tokens[1]);
                     } 
+
+                    if(tokens[0].equals("AT:")){
+                        view.maintenance();
+                    }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

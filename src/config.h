@@ -20,5 +20,8 @@
 #define SONAR_TIME 5000 //TODO
 
 
+#define N1 1000
+
+extern  bool isMaintenanceDone = false;
 
 #endif

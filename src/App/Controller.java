@@ -7,7 +7,7 @@ public class Controller  {
 	
 	public Controller(String port, Gui view) throws Exception {
 		this.view = view;
-		channel = new SerialCommChannel(port,9600);		
+		channel = new SerialCommChannel(port,9600);
 		new Monitoring(channel,view).start();
 			
 		/* attesa necessaria per fare in modo che Arduino completi il reboot */

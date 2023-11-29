@@ -18,7 +18,7 @@ class CarPresenceTask: public Task{
         void tick();
 
     private:
-        enum {SLEEP, CHECKIN, ENTERED, WASHING, CHECKOUT} state;
+        enum {SLEEP, DETECTED, CHECKIN, ENTERED, WASHING, CHECKOUT} state;
         void setState(int state);
 
         Sonar* sonar;

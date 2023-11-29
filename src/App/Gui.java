@@ -1,14 +1,10 @@
 package App;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
-import pc.Window;
 
 public class Gui extends JPanel {
 
@@ -34,15 +30,29 @@ public class Gui extends JPanel {
     private void run() {
 
         numberOfWashes.repaint();
-        temp.repaint();
-        if(/*warning*/ this.getTemperature() > 4) {
-            this.maintenance();
-        }  
+        temp.repaint(); 
         
     }
 
-    private void maintenance() {
-        JOptionPane.showMessageDialog(null, "Fix the issue and then click the button","WARNING", JOptionPane.INFORMATION_MESSAGE);
+    public int maintenance() {
+        // Il terzo parametro rappresenta i pulsanti visualizzati nel dialogo
+        int result = JOptionPane.showOptionDialog(
+            null,
+            "Fix the issue and then click the button",
+            "WARNING",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new Object[]{"OK", "Cancel"},  // Array di pulsanti
+            "OK"  // Pulsante predefinito
+        );
+
+
+        if (result == 0) {
+            //send ok pressed button
+        } 
+    
+        return result;
     }
 
     public Home getHome() {
@@ -56,9 +66,11 @@ public class Gui extends JPanel {
     }
 
     private int getTemperature() {
-        
         return temperature;
     }
+
+
+    
 
  
     public void setLavaggi(String value){
