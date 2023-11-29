@@ -60,19 +60,17 @@ void CarPresenceTask::tick()
         }
         // deep sleep method
         power->sleep();
-        G1->switchOn();
-        lcd->display("Welcome");
-        setState(CHECKIN);
-
-        // if(/*pir->isDetected()*/true) {
-        /*G1->switchOn();
-        lcd->display("Welcome");
-
-        setState(CHECKIN);*/
-
-        //}
+        setState(DETECTED);
         break;
 
+    case DETECTED:
+            lcd->display("Welcome");
+            G1->switchOn();
+            delay->setDelay(N1);
+            while(!delay->isDelayComplete()) {
+                temperature->tick();
+            }
+        break;
     case CHECKIN:
 
         servo->setPosition(90);
@@ -80,7 +78,6 @@ void CarPresenceTask::tick()
 
         lcd->clear();
         lcd->twoLineText("Proceed to the washing area");
-        // Serial.println(sonar->getDistance());
         delay->setDelay(500); // set 2second waiting
         while (!delay->isDelayComplete()){
             distance = sonar->getDistance();
