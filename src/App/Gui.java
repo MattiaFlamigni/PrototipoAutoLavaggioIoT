@@ -50,6 +50,8 @@ public class Gui extends JPanel {
 
         if (result == 0) {
             //send ok pressed button
+
+            
         } 
     
         return result;

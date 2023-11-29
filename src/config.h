@@ -22,6 +22,6 @@
 
 #define N1 1000
 
-extern  bool isMaintenanceDone = false;
+
 
 #endif

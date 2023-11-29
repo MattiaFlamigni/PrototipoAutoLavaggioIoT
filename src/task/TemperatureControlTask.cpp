@@ -29,7 +29,7 @@ void TemperatureControlTask::tick(){
         if(DEBUG){
             Serial.println("NORMAL");
         }
-        if(currentTemp>0){
+        if(currentTemp>50){
             
             setState(PRE_ALARM);
         }
@@ -49,7 +49,7 @@ void TemperatureControlTask::tick(){
         }
 
 
-        if(currentTemp>30){
+        if(currentTemp>50){
             setState(ALARM);
             Serial.println("AT: Alarm");
 
