@@ -35,7 +35,7 @@ public class Gui extends JPanel {
 
         numberOfWashes.repaint();
         temp.repaint();
-        if(/*warning*/ temperature > 29) {
+        if(/*warning*/ this.getTemperature() > 4) {
             this.maintenance();
         }  
         
@@ -55,6 +55,12 @@ public class Gui extends JPanel {
         run();
     }
 
+    private int getTemperature() {
+        
+        return temperature;
+    }
+
+ 
     public void setLavaggi(String value){
         numberOfWashes.setText(value);
         run();

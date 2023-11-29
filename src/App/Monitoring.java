@@ -9,7 +9,7 @@ public class Monitoring extends Thread  {
     public Monitoring(SerialCommChannel channel, Gui view) {
         this.channel = channel;
         this.view = view;
-        view.setTemperature("55"); //TODO
+        
         
     }
 
