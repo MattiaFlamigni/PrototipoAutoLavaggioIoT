@@ -51,6 +51,7 @@ public class Home extends JFrame {
     public void setTemperature(String value){
         SwingUtilities.invokeLater(() -> {
             valueTemperatura.setText(value);
+            System.out.println(valueTemperatura.getX());
         });
     }
 
