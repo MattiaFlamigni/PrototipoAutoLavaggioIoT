@@ -31,20 +31,14 @@ public class Gui extends JPanel {
         //this.loop();
     }
 
-    private void loop() {
-        while(true) {
-            numberOfWashes.repaint();
-            temp.repaint();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if(/*warning*/ temperature > 35) {
-                this.maintenance();
-            }  
-            this.repaint();
-        }
+    private void run() {
+
+        numberOfWashes.repaint();
+        temp.repaint();
+        if(/*warning*/ temperature > 29) {
+            this.maintenance();
+        }  
+        
     }
 
     private void maintenance() {
@@ -58,10 +52,12 @@ public class Gui extends JPanel {
     
     public void setTemperature(String value){
         temp.setText(value);
+        run();
     }
 
     public void setLavaggi(String value){
         numberOfWashes.setText(value);
+        run();
     }
 
     public void setController(Controller contr){
