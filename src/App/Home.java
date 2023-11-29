@@ -18,12 +18,12 @@ public class Home extends JFrame {
     private Controller controller;
 
 
-    public Home() {
+    public Home(JPanel panel) {
 
         this.setTitle("Home");
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+/*
         Container container = getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); 
 
@@ -44,14 +44,16 @@ public class Home extends JFrame {
         
 
         this.setVisible(true);
+*/
 
+        this.add(panel);
+        this.setVisible(true);
     }
 
 
     public void setTemperature(String value){
         SwingUtilities.invokeLater(() -> {
             valueTemperatura.setText(value);
-            System.out.println(valueTemperatura.getX());
         });
     }
 

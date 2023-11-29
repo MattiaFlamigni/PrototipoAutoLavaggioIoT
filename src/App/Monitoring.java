@@ -23,7 +23,7 @@ public class Monitoring extends Thread  {
                 
                 String[] tokens = msg.split(" ");
                 if (tokens.length == 2){
-                    if (tokens[0].equals("T")){
+                    if (tokens[0].equals("T:")){
                         view.setTemperature(tokens[1]);
                     } 
                 }
