@@ -4,9 +4,9 @@ package App;
 
 public class Monitoring extends Thread  {
     SerialCommChannel channel;
-    Home view;
+    Gui view;
 
-    public Monitoring(SerialCommChannel channel, Home view) {
+    public Monitoring(SerialCommChannel channel, Gui view) {
         this.channel = channel;
         this.view = view;
         view.setTemperature("55"); //TODO

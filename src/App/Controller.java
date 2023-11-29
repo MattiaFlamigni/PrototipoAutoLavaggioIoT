@@ -3,9 +3,9 @@ package App;
 public class Controller  {
 
 	SerialCommChannel channel;
-	Home view;
+	Gui view;
 	
-	public Controller(String port, Home view) throws Exception {
+	public Controller(String port, Gui view) throws Exception {
 		this.view = view;
 		channel = new SerialCommChannel(port,115200);		
 		new Monitoring(channel,view).start();

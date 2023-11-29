@@ -15,9 +15,6 @@ public class Home extends JFrame {
     private JTextField labelLavaggi;
     private JTextField valueLavaggi;
 
-    private Controller controller;
-
-
     public Home(JPanel panel) {
 
         this.setTitle("Home");
@@ -51,19 +48,7 @@ public class Home extends JFrame {
     }
 
 
-    public void setTemperature(String value){
-        SwingUtilities.invokeLater(() -> {
-            valueTemperatura.setText(value);
-        });
-    }
-
-    public void setLavaggi(String value){
-        valueLavaggi.setText(value);
-    }
-
-    public void setController(Controller contr){
-		this.controller = contr;
-	}
+    
 
 
 

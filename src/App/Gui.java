@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import pc.Window;
 
@@ -19,6 +20,7 @@ public class Gui extends JPanel {
     JLabel numberOfWashes = new JLabel(numWashes.toString());
     JLabel temp = new JLabel(temperature.toString());
     Home home;
+    private Controller controller;
 
     public Gui() {
         this.home = new Home(this);
@@ -31,14 +33,13 @@ public class Gui extends JPanel {
 
     private void loop() {
         while(true) {
-            numberOfWashes.setText(numWashes.toString());
-            temp.setText(temperature.toString());
+            numberOfWashes.repaint();
+            temp.repaint();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            temperature++;
             if(/*warning*/ temperature > 35) {
                 this.maintenance();
             }  
@@ -53,6 +54,21 @@ public class Gui extends JPanel {
     public Home getHome() {
         return this.home;
     }
+
+    
+    public void setTemperature(String value){
+        SwingUtilities.invokeLater(() -> {
+            temp.setText(value);
+        });
+    }
+
+    public void setLavaggi(String value){
+        numberOfWashes.setText(value);
+    }
+
+    public void setController(Controller contr){
+		this.controller = contr;
+	}
     
     
 }
