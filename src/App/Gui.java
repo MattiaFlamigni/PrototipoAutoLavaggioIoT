@@ -28,7 +28,7 @@ public class Gui extends JPanel {
         this.add(numberOfWashes);
         this.add(tempLabel);
         this.add(temp);
-        this.loop();
+        //this.loop();
     }
 
     private void loop() {
@@ -57,9 +57,7 @@ public class Gui extends JPanel {
 
     
     public void setTemperature(String value){
-        SwingUtilities.invokeLater(() -> {
-            temp.setText(value);
-        });
+        temp.setText(value);
     }
 
     public void setLavaggi(String value){
