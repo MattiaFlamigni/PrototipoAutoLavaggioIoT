@@ -19,6 +19,9 @@ public class Controller {
 		System.out.println("Waiting Arduino for rebooting...");
 		Thread.sleep(4000);
 		System.out.println("Ready.");
+	}
 
+	public void sendMsg(String msg) {
+		channel.sendMsg(msg);
 	}
 }

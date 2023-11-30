@@ -42,3 +42,4 @@ public:
 extern MsgServiceClass MsgService;
 
 #endif
+

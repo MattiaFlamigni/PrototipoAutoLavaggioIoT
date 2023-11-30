@@ -44,33 +44,7 @@ public class Gui extends JPanel {
 
     }
 
-    /**
-     * show the maintenance dialog and return the pressed button value
-     * 
-     * @return int
-     */
-
-    public int maintenance() {
-        // Il terzo parametro rappresenta i pulsanti visualizzati nel dialogo
-        int result = JOptionPane.showOptionDialog(
-                null,
-                "Fix the issue and then click the button",
-                "WARNING",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                new Object[] { "OK", "Cancel" }, // Array di pulsanti
-                "OK" // Pulsante predefinito
-        );
-
-        if (result == 0) {
-            // send ok pressed button
-
-        }
-
-        return result;
-    }
-
+    
     /**
      * 
      * @return Home

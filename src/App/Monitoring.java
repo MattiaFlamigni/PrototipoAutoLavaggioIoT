@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -27,7 +28,7 @@ public class Monitoring extends Thread {
         while (true) {
             try {
                 String msg = channel.receiveMsg();
-                // System.out.println("received: "+msg);
+                System.out.println("received: "+msg);
 
                 String[] tokens = msg.split(" ");
                 if (tokens.length == 2) {
@@ -36,7 +37,7 @@ public class Monitoring extends Thread {
                     }
 
                     if (tokens[0].equals("AT:")) {
-                        view.maintenance();
+                        this.maintenance();
                     }
 
                     if (tokens[0].equals("A:")) {
@@ -84,5 +85,28 @@ public class Monitoring extends Thread {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+
+
+    private void maintenance() {
+        
+        // Il terzo parametro rappresenta i pulsanti visualizzati nel dialogo
+        int result = JOptionPane.showOptionDialog(
+                null,
+                "Fix the issue and then click the button",
+                "WARNING",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[] { "OK", "Cancel" }, // Array di pulsanti
+                "OK" // Pulsante predefinito
+        );
+        //System.out.println(result);
+        if (result == 0) {
+            channel.sendMsg("MAINTENANCE: OK");  
+            //System.out.println("MAINTENANCE: OK");
+        }
+
     }
 }

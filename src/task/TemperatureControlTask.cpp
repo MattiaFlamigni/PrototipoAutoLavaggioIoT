@@ -3,14 +3,17 @@
 #include <Arduino.h>
 #include "components/ButtonImpl.h"
 #include "config.h"
+#include "MsgService.h"
 
 
 #define DEBUG 1 // 0 - disable, 1 - enable
+bool rewrite = true;
 
 
 TemperatureControlTask::TemperatureControlTask(){
     this->tempSensor = new TempSensorLM35(TMP_SENSOR_PIN);
     this->button = new ButtonImpl(100); //TODO
+    this->msg = new MsgServiceClass();
     setState(NORMAL);
     
 }
@@ -25,20 +28,18 @@ void TemperatureControlTask::tick(){
     switch (state)
     {
     case NORMAL:
+        Serial.println("NORMAL");
         
-        if(DEBUG){
-            Serial.println("NORMAL");
-        }
         if(currentTemp>50){
             
             setState(PRE_ALARM);
+
         }
+
         break;
     case PRE_ALARM:
         
-        if(DEBUG){
-            Serial.println("PRE_ALARM");
-        }
+        Serial.println("PRE_ALARM");
         //wait Nseconds //TODO
     
         for(int i=0; i<2; i++){
@@ -50,8 +51,10 @@ void TemperatureControlTask::tick(){
 
 
         if(currentTemp>50){
+            //Serial.println("AT: Alarm");
+            rewrite=true;
             setState(ALARM);
-            Serial.println("AT: Alarm");
+            
 
         }else{
             setState(NORMAL);
@@ -59,12 +62,23 @@ void TemperatureControlTask::tick(){
         break;
 
     case ALARM:
-        if(DEBUG){
+        Serial.println("ALARM");
+        if(rewrite==true){
             Serial.println("AT: alarm");
+            rewrite=false;
         }
-        if(button->isPressed()){
-            setState(NORMAL);
+        
+        //se sulla seriale arriva MAINTENANCE: OK -> setState(NORMAL)
+
+        if(msg->isMsgAvailable()){
+            Msg* msg = msg->receiveMsg();
+            if(msg->getContent()=="MAINTENANCE: OK"){
+                setState(NORMAL);
+            }
         }
+
+        
+
         
         break;
         

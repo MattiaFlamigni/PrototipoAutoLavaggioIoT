@@ -4,6 +4,7 @@
 #include "Task.h"
 #include "components/TempSensorLM35.h"
 #include "components/ButtonImpl.h"
+#include "MsgService.h"
 
 
 class TemperatureControlTask: public Task{
@@ -16,6 +17,7 @@ private:
     void setState(int state);
     TempSensorLM35* tempSensor;
     Button* button ;
+    MsgServiceClass* msg;
 };
 
 #endif

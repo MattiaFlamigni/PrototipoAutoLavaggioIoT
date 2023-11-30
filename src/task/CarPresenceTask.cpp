@@ -170,6 +170,7 @@ void CarPresenceTask::tick()
     }
 }
 
+
 void CarPresenceTask::setState(int s){
     state = s;
 }
