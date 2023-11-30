@@ -1,5 +1,9 @@
 package App;
 
+/**
+ * Simple interface for an async msg communication channel
+ */
+
 public class Controller {
 
 	SerialCommChannel channel;

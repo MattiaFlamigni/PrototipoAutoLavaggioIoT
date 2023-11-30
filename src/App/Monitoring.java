@@ -6,6 +6,11 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+/**
+ * Class monitoring and control of the washing machine serial messages
+ */
+
 public class Monitoring extends Thread {
     SerialCommChannel channel;
     Gui view;

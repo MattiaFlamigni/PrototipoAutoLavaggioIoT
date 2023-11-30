@@ -4,6 +4,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Gui class
+ * 
+ * @package App
+ * @class Gui
+ * @extends JPanel
+ 
+ */
+
 public class Gui extends JPanel {
 
     Integer numWashes = 0;
@@ -32,6 +41,12 @@ public class Gui extends JPanel {
 
     }
 
+    /**
+     * show the maintenance dialog and return the pressed button value
+     * 
+     * @return int
+     */
+
     public int maintenance() {
         // Il terzo parametro rappresenta i pulsanti visualizzati nel dialogo
         int result = JOptionPane.showOptionDialog(
@@ -53,10 +68,20 @@ public class Gui extends JPanel {
         return result;
     }
 
+    /**
+     * 
+     * @return Home
+     */
     public Home getHome() {
         return this.home;
     }
 
+    /**
+     * 
+     * set the temperature value
+     * @param value
+     * @return void
+     */
     public void setTemperature(String value) {
         temp.setText(value);
         run();
@@ -66,11 +91,20 @@ public class Gui extends JPanel {
         return temperature;
     }
 
+    /**
+     * set the number of washes value
+     * @param value
+     * @return void
+     */
     public void setLavaggi(String value) {
         numberOfWashes.setText(value);
         run();
     }
-
+    /**
+     * set the controller
+     * @param contr
+     * @return void
+     */
     public void setController(Controller contr) {
         this.controller = contr;
     }
