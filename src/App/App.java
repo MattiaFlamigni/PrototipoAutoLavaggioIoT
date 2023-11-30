@@ -1,7 +1,5 @@
 package App;
 
-import javax.swing.SwingUtilities;
-
 public class App {
     static Gui gui;
 

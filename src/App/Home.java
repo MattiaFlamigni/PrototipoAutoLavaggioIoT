@@ -1,7 +1,5 @@
 package App;
 
-import java.awt.GridLayout;
-
 import javax.swing.*;
 
 public class Home extends JFrame {
