@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
 /**
  * Gui class
  * 
@@ -23,6 +24,8 @@ public class Gui extends JPanel {
     JLabel numberOfWashes = new JLabel(numWashes.toString());
     JLabel temp = new JLabel(temperature.toString());
     Home home;
+
+    @SuppressWarnings("unused")
     private Controller controller;
 
     public Gui() {
@@ -85,10 +88,6 @@ public class Gui extends JPanel {
     public void setTemperature(String value) {
         temp.setText(value);
         run();
-    }
-
-    private int getTemperature() {
-        return temperature;
     }
 
     /**
