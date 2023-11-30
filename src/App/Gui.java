@@ -1,10 +1,8 @@
 package App;
 
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 
 public class Gui extends JPanel {
 
@@ -24,36 +22,34 @@ public class Gui extends JPanel {
         this.add(numberOfWashes);
         this.add(tempLabel);
         this.add(temp);
-        //this.loop();
+        // this.loop();
     }
 
     private void run() {
 
         numberOfWashes.repaint();
-        temp.repaint(); 
-        
+        temp.repaint();
+
     }
 
     public int maintenance() {
         // Il terzo parametro rappresenta i pulsanti visualizzati nel dialogo
         int result = JOptionPane.showOptionDialog(
-            null,
-            "Fix the issue and then click the button",
-            "WARNING",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.INFORMATION_MESSAGE,
-            null,
-            new Object[]{"OK", "Cancel"},  // Array di pulsanti
-            "OK"  // Pulsante predefinito
+                null,
+                "Fix the issue and then click the button",
+                "WARNING",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[] { "OK", "Cancel" }, // Array di pulsanti
+                "OK" // Pulsante predefinito
         );
 
-
         if (result == 0) {
-            //send ok pressed button
+            // send ok pressed button
 
-            
-        } 
-    
+        }
+
         return result;
     }
 
@@ -61,8 +57,7 @@ public class Gui extends JPanel {
         return this.home;
     }
 
-    
-    public void setTemperature(String value){
+    public void setTemperature(String value) {
         temp.setText(value);
         run();
     }
@@ -71,18 +66,13 @@ public class Gui extends JPanel {
         return temperature;
     }
 
-
-    
-
- 
-    public void setLavaggi(String value){
+    public void setLavaggi(String value) {
         numberOfWashes.setText(value);
         run();
     }
 
-    public void setController(Controller contr){
-		this.controller = contr;
-	}
-    
-    
+    public void setController(Controller contr) {
+        this.controller = contr;
+    }
+
 }

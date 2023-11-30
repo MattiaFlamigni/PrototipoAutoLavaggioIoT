@@ -6,10 +6,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-
-
-public class Monitoring extends Thread  {
+public class Monitoring extends Thread {
     SerialCommChannel channel;
     Gui view;
 
@@ -17,30 +14,28 @@ public class Monitoring extends Thread  {
         this.channel = channel;
         this.view = view;
         view.setLavaggi(Integer.toString(readFile("lavaggi.txt")));
-        
+
     }
 
+    public void run() {
 
-    public void run(){
-        
-        while(true){
+        while (true) {
             try {
                 String msg = channel.receiveMsg();
-                //System.out.println("received: "+msg);
-                
-                String[] tokens = msg.split(" ");
-                if (tokens.length == 2){
-                    if (tokens[0].equals("T:")){
-                        view.setTemperature(tokens[1]);
-                    } 
+                // System.out.println("received: "+msg);
 
-                    if(tokens[0].equals("AT:")){
+                String[] tokens = msg.split(" ");
+                if (tokens.length == 2) {
+                    if (tokens[0].equals("T:")) {
+                        view.setTemperature(tokens[1]);
+                    }
+
+                    if (tokens[0].equals("AT:")) {
                         view.maintenance();
                     }
 
-                    if(tokens[0].equals("A:")){
+                    if (tokens[0].equals("A:")) {
                         int numWash = readFile("lavaggi.txt");
-                        System.out.println("lavaggi: "+numWash);
                         numWash++;
                         view.setLavaggi(Integer.toString(numWash));
                         rewriteFile("lavaggi.txt", Integer.toString(numWash));
@@ -52,38 +47,37 @@ public class Monitoring extends Thread  {
         }
     }
 
+    private int readFile(String path) {
 
-    private int readFile(String path){
-
-        String data="-1";
+        String data = "-1";
         try {
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-              data = myReader.nextLine();
+                data = myReader.nextLine();
             }
             myReader.close();
-          } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
             return -1;
-          }
+        }
 
-          //return data as integer
-          return Integer.parseInt(data);
+        // return data as integer
+        return Integer.parseInt(data);
 
     }
 
-    private void rewriteFile(String path, String data){
+    private void rewriteFile(String path, String data) {
         try {
             File myObj = new File(path);
             myObj.createNewFile();
             FileWriter myWriter = new FileWriter(path);
             myWriter.write(data);
             myWriter.close();
-          } catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-          }
+        }
     }
 }

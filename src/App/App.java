@@ -9,7 +9,6 @@ public class App {
 
         gui = new Gui();
 
-
         String portName = "/dev/tty.usbmodem141101";
         Controller contr = new Controller(portName, gui);
         gui.setController(contr);
