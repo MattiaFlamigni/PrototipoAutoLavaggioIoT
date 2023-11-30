@@ -10,6 +10,7 @@
 #include "MyNonBlockingDelay.h"
 #include <Time.h>
 #include <avr/sleep.h>
+#include "MsgService.h"
 
 #define DEBUG 1 // 0 - disable, 1 - enable
 
@@ -18,6 +19,8 @@ unsigned long countdownDuration = 5000; //  (5 secondi)
 bool countdownActive = true;
 bool updateTimer;
 float distance = -1;
+
+
 
 CarPresenceTask::CarPresenceTask(Task *blink, Task *temperature)
 {
@@ -43,10 +46,13 @@ CarPresenceTask::CarPresenceTask(Task *blink, Task *temperature)
 
     this->power = new PowerManager();
 
+    this->msg = new MsgServiceClass();
+
     power->enablePIRInterrupt();
 
     setState(SLEEP);
     updateTimer = true;
+
 }
 
 void CarPresenceTask::tick()
@@ -107,6 +113,7 @@ void CarPresenceTask::tick()
         break;
 
     case WASHING:
+        
 
         if (updateTimer){
             startTime = millis();
@@ -114,7 +121,7 @@ void CarPresenceTask::tick()
         }
 
         if (DEBUG){
-            Serial.println("Washing");
+            //Serial.println("Washing");
         }
         // red blink
         R->switchOff();
@@ -131,6 +138,7 @@ void CarPresenceTask::tick()
             }
             else{
                 countdownActive = false;
+                msg->sendMsg("A: washing");
                 setState(CHECKOUT);
             }
         }

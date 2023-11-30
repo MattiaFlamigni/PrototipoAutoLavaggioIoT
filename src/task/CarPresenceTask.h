@@ -11,6 +11,7 @@
 #include "components/Led.h"
 #include "MyNonBlockingDelay.h"
 #include "PowerManager.h"
+#include "MsgService.h"
 
 class CarPresenceTask: public Task{
     public:
@@ -34,6 +35,9 @@ class CarPresenceTask: public Task{
 
         PowerManager* power;
         MyNonBlockingDelay* delay;
+
+        MsgServiceClass* msg;
+
 
 
 
