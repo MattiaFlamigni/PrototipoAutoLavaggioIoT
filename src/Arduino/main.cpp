@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author Mattia Flamigni (mattia.flamigni4@studio.unibo.it), Filippo Badioli (filippo.badioli@studio.unibo.it)
+ * 
+ */
+
 #include <Arduino.h> 
 #include "Arduino/kernel/Task.h"
 #include "Arduino/task/TemperatureControlTask.h"
