@@ -46,12 +46,13 @@ void CarPresenceTask::tick(){
 
     switch (state){
     case SLEEP:
+
         if (DEBUG){
             lcd->display("Sleep");
             Serial.println("sleep");
         }
         // deep sleep method
-        //power->sleep();
+        power->sleep();
         setState(DETECTED);
         break;
 
