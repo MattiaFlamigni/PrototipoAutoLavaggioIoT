@@ -4,8 +4,8 @@
 #define POWERMANAGER_H
 
 #include <avr/sleep.h>
-#include "components/Led.h"
-#include "components/Lcd.h"
+#include "Arduino/components/Led.h"
+#include "Arduino/components/Lcd.h"
 
 class PowerManager {
 public:

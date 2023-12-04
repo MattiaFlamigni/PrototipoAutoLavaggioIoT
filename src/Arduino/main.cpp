@@ -1,10 +1,10 @@
 #include <Arduino.h> 
-#include "task/Task.h"
-#include "task/TemperatureControlTask.h"
-#include "task/Scheduler.h"
-#include "task/CarPresenceTask.h"
-#include "task/BlinkTask.h"
-#include "config.h"
+#include "Arduino/kernel/Task.h"
+#include "Arduino/task/TemperatureControlTask.h"
+#include "Arduino/kernel/Scheduler.h"
+#include "Arduino/task/CarPresenceTask.h"
+#include "Arduino/task/BlinkTask.h"
+#include "Arduino/config.h"
 
 Scheduler sched;
 void setup() {

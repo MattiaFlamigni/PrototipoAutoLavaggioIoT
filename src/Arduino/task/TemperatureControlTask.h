@@ -1,10 +1,10 @@
 #ifndef __TEMPERATURE_CONTROL__
 #define __TEMPERATURE_CONTROL__
 
-#include "Task.h"
-#include "components/TempSensorLM35.h"
-#include "components/ButtonImpl.h"
-#include "MsgService.h"
+#include "Arduino/kernel/Task.h"
+#include "Arduino/components/TempSensorLM35.h"
+#include "Arduino/components/ButtonImpl.h"
+#include "Arduino/kernel/MsgService.h"
 
 
 class TemperatureControlTask: public Task{

@@ -18,6 +18,7 @@
 #define MINDIST 0.04 
 #define MAXDIST 0.1 //TODO
 #define SONAR_TIME 5000 //TODO
+#define MAXTEMP 50
 
 
 #define N1 1000

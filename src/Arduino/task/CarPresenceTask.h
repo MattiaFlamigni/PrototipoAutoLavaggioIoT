@@ -1,17 +1,17 @@
 #ifndef __CARPRESENCETASK__
 #define __CARPRESENCETASK__
 
-#include "Task.h"
-#include "components/Sonar.h"
-#include "components/Pir.h"
+#include "Arduino/kernel/Task.h"
+#include "Arduino/components/Sonar.h"
+#include "Arduino/components/Pir.h"
 //#include "components/Servo.h"
-#include "components/ButtonImpl.h"
-#include "components/Lcd.h"
-#include "components/servo_motor.h"
-#include "components/Led.h"
-#include "MyNonBlockingDelay.h"
-#include "PowerManager.h"
-#include "MsgService.h"
+#include "Arduino/components/ButtonImpl.h"
+#include "Arduino/components/Lcd.h"
+#include "Arduino/components/servo_motor.h"
+#include "Arduino/components/Led.h"
+#include "Arduino/util/MyNonBlockingDelay.h"
+#include "Arduino/util/PowerManager.h"
+#include "Arduino/kernel/MsgService.h"
 
 class CarPresenceTask: public Task{
     public:

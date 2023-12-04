@@ -1,8 +1,8 @@
 #ifndef __BLINK_TASK__
 #define __BLINK_TASK__
 
-#include "Task.h"
-#include "components/Led.h"
+#include "Arduino/kernel/Task.h"
+#include "Arduino/components/Led.h"
 
 class BlinkTask: public Task {
 

@@ -1,18 +1,18 @@
 #include <Arduino.h>
-#include "CarPresenceTask.h"
-#include "config.h"
-#include "components/Sonar.h"
-#include "components/Pir.h"
+#include "Arduino/task/CarPresenceTask.h"
+#include "Arduino/config.h"
+#include "Arduino/components/Sonar.h"
+#include "Arduino/components/Pir.h"
 
-#include "components/Lcd.h"
-#include "components/servo_motor_impl.h"
-#include "components/Led.h"
-#include "MyNonBlockingDelay.h"
+#include "Arduino/components/Lcd.h"
+#include "Arduino/components/servo_motor_impl.h"
+#include "Arduino/components/Led.h"
+#include "Arduino/util/MyNonBlockingDelay.h"
 #include <Time.h>
 #include <avr/sleep.h>
-#include "MsgService.h"
+#include "Arduino/kernel/MsgService.h"
 
-#define DEBUG 1 // 0 - disable, 1 - enable
+#define DEBUG 0 // 0 - disable, 1 - enable
 
 unsigned long startTime;
 unsigned long countdownDuration = 5000; //  (5 secondi)
@@ -20,43 +20,29 @@ bool countdownActive = true;
 bool updateTimer;
 float distance = -1;
 
-
-
-CarPresenceTask::CarPresenceTask(Task *blink, Task *temperature)
-{
+CarPresenceTask::CarPresenceTask(Task *blink, Task *temperature){
     this->blink = blink;
     this->temperature = temperature;
     this->sonar = new Sonar(ECHO_PIN, TRIG_PIN, SONAR_TIME);
     this->pir = new Pir(PIR_PIN);
-
     this->servo = new ServoMotorImpl(SERVO_PIN);
     servo->on();
     servo->setPosition(0);
-
     this->button = new ButtonImpl(START_BUTTON_PIN);
-
     this->lcd = new Lcd(SDA_PIN, SCL_PIN);
     lcd->clear();
-
     this->G1 = new Led(GREEN_LED_1);
     this->G2 = new Led(GREEN_LED_2);
     this->R = new Led(RED_LED);
-
     this->delay = new MyNonBlockingDelay();
-
     this->power = new PowerManager();
-
     this->msg = new MsgServiceClass();
-
     power->enablePIRInterrupt();
-
     setState(SLEEP);
     updateTimer = true;
-
 }
 
-void CarPresenceTask::tick()
-{
+void CarPresenceTask::tick(){
 
     switch (state){
     case SLEEP:
@@ -120,9 +106,6 @@ void CarPresenceTask::tick()
             updateTimer = false;
         }
 
-        if (DEBUG){
-            //Serial.println("Washing");
-        }
         // red blink
         R->switchOff();
         blink->setActive(true);

@@ -1,9 +1,9 @@
 #include <avr/sleep.h>
 #include "PowerManager.h"
 #include <Arduino.h>
-#include "config.h"
-#include "components/Led.h"
-#include "components/Lcd.h"
+#include "Arduino/config.h"
+#include "Arduino/components/Led.h"
+#include "Arduino/components/Lcd.h"
 
 PowerManager::PowerManager(){
 }

@@ -1,4 +1,4 @@
-package App;
+package Pc;
 
 public class App {
     static Gui gui;

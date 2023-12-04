@@ -1,4 +1,4 @@
-package App;
+package Pc;
 
 import javax.swing.*;
 
